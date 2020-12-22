@@ -1,3 +1,10 @@
+### [1.0.2](https://github.com/rIIh/magx_dart_client/compare/v1.0.1...v1.0.2) (2020-12-22)
+
+
+### Bug Fixes
+
+* update description ([f006fe5](https://github.com/rIIh/magx_dart_client/commit/f006fe5f649425a5d26e628838079bb29699da42))
+
 ### [1.0.1](https://github.com/rIIh/magx_dart_client/compare/v1.0.0...v1.0.1) (2020-12-22)
 
 
