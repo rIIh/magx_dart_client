@@ -32,8 +32,8 @@ void main() async {
   Future<bool> checkReady() async {
     return http.Client()
         .get(Uri.parse('$testHostServer/magx/'))
-        .catchError((o) => false)
-        .then((value) => value.statusCode == 200);
+        .then((value) => value.statusCode == 200)
+        .catchError((_) => false);
   }
 
   var canTestWebsocketClient = await checkReady();
