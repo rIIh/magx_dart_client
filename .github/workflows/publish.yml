@@ -2,7 +2,7 @@ name: Dart publish package
 
 on:
   release:
-    types: [published]
+    types: [published, created, released]
   workflow_dispatch:
 
 jobs: 
