@@ -25,6 +25,7 @@ jobs:
         with:
           extra_plugins: |
             semantic-release-dart
+            conventional-changelog-conventionalcommits
             @semantic-release/changelog
             @semantic-release/git
             @semantic-release/github"
