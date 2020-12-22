@@ -21,6 +21,8 @@ class ValidHttpClient extends Fake implements http.Client {
             startsWith('/magx/auth/'): () => verify(request),
           });
         }
+      default:
+        throw UnimplementedError();
     }
   }
 

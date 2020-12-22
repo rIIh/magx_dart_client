@@ -8,7 +8,7 @@ import 'connection/ws_connection.dart';
 import 'room/room.dart';
 import 'room/room_data.dart';
 import 'service.dart';
-import 'token_storage';
+import 'token_storage.dart';
 
 class Authentication {
   final String id;
@@ -75,7 +75,7 @@ class MagxClient {
     http.Client client,
     Iterable interceptors = const [],
   }) : transport = params.transport ?? ((p) => WSConnection(p)) {
-    address = params.address ?? "localhost";
+    address = params.address ?? 'localhost';
     port = params.port;
     secure = params.secure;
 

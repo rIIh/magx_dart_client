@@ -5,7 +5,7 @@ import 'package:magx_client/src/client.dart';
 import 'package:magx_client/src/connection/connection.dart';
 import 'package:magx_client/src/room/room.dart';
 import 'package:magx_client/src/room/room_data.dart';
-import 'package:magx_client/src/token_storage';
+import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
 
@@ -61,7 +61,7 @@ void main() async {
           final data2 = await client2.authenticateGuest(deviceId: Uuid().v4());
           token1 = data1.body.token;
           token2 = data2.body.token;
-        } on Exception {}
+        } catch (_) {}
       });
 
       tearDown(() {

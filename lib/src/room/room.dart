@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:magx_client/src/common/disposable.dart';
-
 import '../client.dart';
+import '../common/disposable.dart';
 import '../connection/connection.dart';
 import 'room_data.dart';
 

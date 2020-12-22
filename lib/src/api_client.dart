@@ -2,7 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:http/http.dart' as http;
 
 import 'service.dart';
-import 'token_storage';
+import 'token_storage.dart';
 
 class MagxApiClient extends ChopperClient {
   TokenStorage tokenProvider;

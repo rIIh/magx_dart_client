@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:magx_client/src/client.dart';
-import 'package:magx_client/src/token_storage';
+import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
 
 import 'mock/valid_http_client.dart';

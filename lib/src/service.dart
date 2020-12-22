@@ -18,6 +18,7 @@ class CreateRoomPayload {
 @ChopperApi()
 abstract class _MagxService extends ChopperService {
   @Post(path: '/auth')
+  // ignore: unused_element
   Future<Response> _authenticate(@Body() Map<String, dynamic> body);
 
   @Get(path: '/auth/{token}')
