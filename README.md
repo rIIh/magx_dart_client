@@ -2,6 +2,8 @@
 
 Dart Client for MagX multiplayer game server.
 
+See [node MagX server implementation](https://github.com/udamir/magx)
+
 ## Usage
 
 A simple usage example:
