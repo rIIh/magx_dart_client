@@ -2,7 +2,6 @@ name: magx_client
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
 repository: https://github.com/rIIh/magx_dart_client
-# homepage: https://www.example.com
 
 environment:
   sdk: '>=2.8.1 <3.0.0'
@@ -15,10 +14,12 @@ dependencies:
   messagepack: ^0.1.2
   msgpack_dart: ^0.0.7
   chopper: ^3.0.6
+  match: ^0.3.1
+  quiver: ^2.1.5
+  meta: ^1.2.4
 
 dev_dependencies:
   build_runner: ^1.10.11
-  match: ^0.3.1
   build_verify: ^1.1.1
   pedantic: ^1.9.2
   test: ^1.15.7
