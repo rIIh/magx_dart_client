@@ -1,3 +1,10 @@
+### [1.0.3](https://github.com/rIIh/magx_dart_client/compare/v1.0.2...v1.0.3) (2020-12-22)
+
+
+### Bug Fixes
+
+* fix linting errors and invalid imports ([316999b](https://github.com/rIIh/magx_dart_client/commit/316999bd7fac717d16e696729e8c6c6fd48c2f28))
+
 ### [1.0.2](https://github.com/rIIh/magx_dart_client/compare/v1.0.1...v1.0.2) (2020-12-22)
 
 
