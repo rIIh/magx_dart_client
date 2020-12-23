@@ -1,3 +1,10 @@
+### [1.0.4](https://github.com/rIIh/magx_dart_client/compare/v1.0.3...v1.0.4) (2020-12-23)
+
+
+### Bug Fixes
+
+* **deps:** switch to msg_pack dependency ([eed4875](https://github.com/rIIh/magx_dart_client/commit/eed4875a3ca7da640ddf8693022272efea0c2151))
+
 ### [1.0.3](https://github.com/rIIh/magx_dart_client/compare/v1.0.2...v1.0.3) (2020-12-22)
 
 
