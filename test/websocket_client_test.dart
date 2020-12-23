@@ -83,6 +83,7 @@ void main() async {
 
       test('messaging in room successfully', () async {
         final createdRoom = await client1.createRoom('chat');
+        expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));
         expectLater(
@@ -127,8 +128,10 @@ void main() async {
 
       test('receives snapshots and patches', () async {
         final createdRoom = await client1.createRoom('mosx-chat');
+        expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));
+        await Future.delayed(Duration(seconds: 2));
       });
     },
     skip: !canTestWebsocketClient,

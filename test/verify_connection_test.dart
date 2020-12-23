@@ -1,7 +1,10 @@
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
 import 'package:magx_client/src/client.dart';
 import 'package:test/test.dart';
 
-void main() {
+void main() async {
   MagxClient client;
 
   setUp(() {
@@ -10,6 +13,16 @@ void main() {
       secure: true,
     ));
   });
+
+  final testHostServer = Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
+  Future<bool> checkReady() async {
+    return http.Client()
+        .get(Uri.parse('$testHostServer/magx/'))
+        .then((value) => value.statusCode == 200)
+        .catchError((_) => false);
+  }
+
+  var canTestWebsocketClient = await checkReady();
 
   group('authenticates with valid response body', () {
     void authenticate(String address) {
@@ -25,7 +38,7 @@ void main() {
     }
 
     authenticate('durakgame.herokuapp.com');
-  });
+  }, skip: !canTestWebsocketClient);
 
   group('verifies token with valid response body', () {
     void verify(String address) {
@@ -43,5 +56,5 @@ void main() {
     }
 
     verify('durakgame.herokuapp.com');
-  });
+  }, skip: !canTestWebsocketClient);
 }

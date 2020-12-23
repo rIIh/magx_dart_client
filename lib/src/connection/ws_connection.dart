@@ -1,7 +1,7 @@
-import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
-import 'package:messagepack/messagepack.dart';
+import 'package:msgpack_dart/msgpack_dart.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../client.dart';
@@ -25,9 +25,8 @@ class WSConnection implements Connection {
     ws.listen(
       (data) {
         if (_closed != true) {
-          final unpacker = Unpacker(data);
-          final event = unpacker.unpackInt();
-          var args = unpacker.unpackList();
+          final event = Deserializer(Uint8List.fromList([data.first])).decode();
+          final args = Deserializer(Uint8List.fromList(data.skip(1).toList())).decode();
           _messages.add(Message.fromJson({'event': event, 'data': args}));
         }
       },
@@ -45,17 +44,10 @@ class WSConnection implements Connection {
 
   @override
   void send(Message message) {
-    final packer = Packer();
-    packer.packInt(encode(message.event));
+    final packer = Serializer();
+    packer.encode(encode(message.event));
     if (message.data != null) {
-      packer.packListLength(message.data.length);
-      for (final arg in message.data) {
-        if (arg is String) {
-          packer.packString(arg);
-        } else {
-          packer.packString(jsonEncode(arg));
-        }
-      }
+      packer.encode(message.data);
     }
     ws.add(packer.takeBytes().toList());
   }
