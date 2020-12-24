@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import 'package:magx_client/src/client.dart';
 import 'package:magx_client/src/connection/connection.dart';
 import 'package:magx_client/src/connection/ws_connection.dart';
@@ -8,6 +7,8 @@ import 'package:magx_client/src/room/room.dart';
 import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
+
+import 'mock/check_integration_target.dart';
 
 void main() async {
   test('websocket connects normally', () async {
@@ -28,15 +29,6 @@ void main() async {
     websocket.close();
   }, timeout: Timeout(Duration(seconds: 5)));
 
-  final testHostServer = Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
-  Future<bool> checkReady() async {
-    return http.Client()
-        .get(Uri.parse('$testHostServer/magx/'))
-        .then((value) => value.statusCode == 200)
-        .catchError((_) => false);
-  }
-
-  var canTestWebsocketClient = await checkReady();
   group(
     'magx websocket client tests',
     () {
@@ -99,16 +91,7 @@ void main() async {
         expectLater(room.body.stream, emits(equals(Message.connected())));
         final joinedRoom = await client2.connect(room.body.id);
         expect(joinedRoom, isNotNull);
-        var state;
-        expect(
-          state = await client2.getRoom(joinedRoom.id).then((value) => value.body.clients),
-          contains(await client2.verify().then((value) => value.body.id)),
-        );
-        (joinedRoom.connection as WSConnection).ws.close();
-        expect(
-          state = await client2.getRoom(joinedRoom.id).then((value) => value.body.clients),
-          contains(await client2.verify().then((value) => value.body.id)),
-        );
+        joinedRoom.dispose();
 
         await Future.delayed(Duration(seconds: 2));
 
@@ -177,6 +160,6 @@ void main() async {
         await Future.delayed(Duration(seconds: 2));
       });
     },
-    skip: !canTestWebsocketClient,
+    skip: !(await integrationServerAvailable),
   );
 }
