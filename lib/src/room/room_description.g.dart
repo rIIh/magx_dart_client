@@ -28,7 +28,7 @@ Map<String, dynamic> _$_$_RoomDescriptionToJson(_$_RoomDescription instance) =>
       'name': instance.name,
       'locked': instance.locked,
       'clients': instance.clients,
-      'data': instance.data,
+      'data': instance.data?.toJson(),
     };
 
 _$_Data _$_$_DataFromJson(Map<String, dynamic> json) {
