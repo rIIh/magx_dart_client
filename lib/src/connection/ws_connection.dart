@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:msgpack_dart/msgpack_dart.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -10,6 +11,7 @@ import 'connection.dart';
 class WSConnection implements Connection {
   bool _closed = false;
   Subject<Message> _messages;
+  @visibleForTesting
   WebSocket ws;
 
   @override

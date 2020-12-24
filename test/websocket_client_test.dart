@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:magx_client/src/client.dart';
 import 'package:magx_client/src/connection/connection.dart';
+import 'package:magx_client/src/connection/ws_connection.dart';
 import 'package:magx_client/src/room/room.dart';
-import 'package:magx_client/src/room/room_data.dart';
 import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
 import 'package:uuid/uuid.dart';
@@ -75,14 +75,58 @@ void main() async {
       });
 
       test('creates room successfully', () async {
-        final room = await client1.createRoom('chat');
+        final room = await client1.create('chat');
         expect(room.isSuccessful, isTrue);
         activeConnections.add(room.body);
         expectLater(room.body.stream, emits(equals(Message.connected())));
       });
 
+      test('can join room', () async {
+        final room = await client1.create('chat');
+        expect(room.isSuccessful, isTrue);
+        activeConnections.add(room.body);
+        expectLater(room.body.stream, emits(equals(Message.connected())));
+        final joinedRoom = await client2.connect(room.body.id);
+        activeConnections.add(joinedRoom);
+        expectLater(room.body.stream, emits(equals(Message.connected())));
+      });
+
+      test('reconnects successfully', () async {
+        final room = await client1.create('mosx-chat');
+        expect(room.isSuccessful, isTrue);
+        room.body.stream.listen((message) => print('1: ${message.toString()}'));
+        activeConnections.add(room.body);
+        expectLater(room.body.stream, emits(equals(Message.connected())));
+        final joinedRoom = await client2.connect(room.body.id);
+        expect(joinedRoom, isNotNull);
+        var state;
+        expect(
+          state = await client2.getRoom(joinedRoom.id).then((value) => value.body.clients),
+          contains(await client2.verify().then((value) => value.body.id)),
+        );
+        (joinedRoom.connection as WSConnection).ws.close();
+        expect(
+          state = await client2.getRoom(joinedRoom.id).then((value) => value.body.clients),
+          contains(await client2.verify().then((value) => value.body.id)),
+        );
+
+        await Future.delayed(Duration(seconds: 2));
+
+        final reconnectedRoom = await client2.connect(room.body.id);
+        expect(reconnectedRoom, isNotNull);
+
+        activeConnections.add(reconnectedRoom);
+        await expectLater(
+          reconnectedRoom.stream,
+          emitsThrough(anyOf(
+            equals(Message.reconnected()),
+            isNot(equals(Message.joined())),
+          )),
+        );
+      });
+
       test('messaging in room successfully', () async {
-        final createdRoom = await client1.createRoom('chat');
+        final createdRoom = await client1.create('chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));
@@ -114,12 +158,11 @@ void main() async {
           ),
         );
 
-        final joinResponse = await client2.joinRoom(RoomData(id: createdRoom.body.id, name: 'chat'));
-        expect(joinResponse.isSuccessful, isTrue, reason: joinResponse.error);
-        final joinedRoom = joinResponse.body;
+        final joinedRoom = await client2.connect(createdRoom.body.id);
+        expect(joinedRoom, isNotNull);
+        activeConnections.add(joinedRoom);
         joinedRoom.stream.listen((message) => print('2: ${message.toString()}'));
 
-        activeConnections.add(joinedRoom);
         await Future.delayed(Duration(milliseconds: 400));
         joinedRoom.connection.send(Message.message(['message', 'test_message']));
         client2.leaveRoom(joinedRoom.id);
@@ -127,7 +170,7 @@ void main() async {
       });
 
       test('receives snapshots and patches', () async {
-        final createdRoom = await client1.createRoom('mosx-chat');
+        final createdRoom = await client1.create('mosx-chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));

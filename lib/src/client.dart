@@ -7,6 +7,7 @@ import 'connection/connection.dart';
 import 'connection/ws_connection.dart';
 import 'room/room.dart';
 import 'room/room_data.dart';
+import 'room/room_description.dart';
 import 'service.dart';
 import 'token_storage.dart';
 
@@ -126,8 +127,10 @@ class MagxClient {
         );
   }
 
-  Future<Response<String>> getRoom(String id) => api.service.getRoom(id).then(
-        (value) => value.copyWith(body: value.body as String),
+  Future<Response<RoomDescription>> getRoom(String id) => api.service.getRoom(id).then(
+        (value) => value.isSuccessful
+            ? value.copyWith(body: RoomDescription.fromJson(value.body))
+            : value.copyWith(body: null),
       );
 
   Future<Response<Iterable<dynamic>>> getRooms(List<String> names) => api.service.getRooms(names).then(
@@ -136,31 +139,54 @@ class MagxClient {
         ),
       );
 
-  Future<Response<Room>> joinRoom(RoomData description) => api.service.joinRoom(description.id).then(
-        (value) async {
-          if (value.isSuccessful) {
-            final description = RoomData.fromJson(value.body);
-            return value.copyWith(body: await connectRoom(description));
-          }
-          return value.copyWith(body: null);
-        },
-      );
+  Future<Room> connect(String id) async {
+    final user = await verify();
+    final descriptionResponse = await getRoom(id);
+    if (descriptionResponse.isSuccessful == false || user.isSuccessful == false) {
+      return null;
+    }
+    final description = descriptionResponse.body;
+    print('[MagxClient.connect]: ${description.clients}');
+    if (description.clients.contains(user.body.id)) {
+      return _connectRoom(RoomData.fromJson(description.toJson()), reconnect: true);
+    } else {
+      final joinResponse = await api.service.joinRoom(description.id).then(
+            (value) => value.isSuccessful
+                ? value.copyWith(body: RoomData.fromJson(value.body))
+                : value.copyWith(
+                    body: null,
+                  ),
+          );
+      if (joinResponse.isSuccessful) {
+        return _connectRoom(joinResponse.body);
+      }
+    }
+    return null;
+  }
 
   Future leaveRoom(String id) => api.service.leaveRoom(id);
 
-  Future<Response<Room>> createRoom(String name, {Map<String, dynamic> options}) => api.service
-          .createRoom(
-        CreateRoomPayload(name, options),
-      )
-          .then((value) async {
-        if (value.isSuccessful) {
-          return value.copyWith(body: await connectRoom(RoomData.fromJson(value.body)));
-        } else {
-          return value.copyWith(body: null);
-        }
-      });
+  Future<Response<Room>> create(String name, {Map<String, dynamic> options}) async {
+    final data = await api.service.createRoom(CreateRoomPayload(name, options)).then(
+          (value) => value.isSuccessful
+              ? value.copyWith(
+                  body: RoomData.fromJson(value.body),
+                )
+              : value.copyWith(body: null),
+        );
+    if (data.isSuccessful) {
+      return data.copyWith(body: await _connectRoom(data.body));
+    }
+    return data.copyWith(body: null);
+  }
 
-  Future<Room> connectRoom(RoomData roomData, {bool reconnect}) async => Room(this, roomData).ready.then(
-        (value) => value..send(reconnect == true ? Message.reconnected() : Message.joined()),
-      );
+  Future<Room> _connectRoom(RoomData data, {bool reconnect}) async => Room(
+        this,
+        data,
+      ).ready.then(
+            (value) => value
+              ..send(
+                reconnect == true ? Message.reconnected() : Message.joined(),
+              ),
+          );
 }
