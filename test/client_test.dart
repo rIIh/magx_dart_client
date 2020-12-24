@@ -1,43 +1,56 @@
-import 'package:http/http.dart' as http;
 import 'package:magx_client/src/client.dart';
+import 'package:magx_client/src/room/room_description.dart';
 import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
+import 'package:uuid/uuid.dart';
 
-import 'mock/valid_http_client.dart';
+import 'mock/check_integration_target.dart';
 
-void main() {
-  http.Client client;
-  MagxClient magxClient;
-  TokenStorage tokenStorage;
-  String token;
+void main() async {
+  group(
+    'rest api client test',
+    () {
+      String token1;
+      MagxClient client;
 
-  setUp(() {
-    client = ValidHttpClient();
-    tokenStorage = TokenStorage.delegate(() => token, (value) => token = value);
-    magxClient = MagxClient(
-      MagxClientParams(
-        address: 'localhost',
-        port: 8888,
-      ),
-      tokenStorage: tokenStorage,
-      client: client,
-    );
-  });
+      setUp(() async {
+        try {
+          final uri = Uri.parse(testHostServer);
+          client = MagxClient(
+            MagxClientParams(address: uri.host, port: uri.port, secure: uri.scheme.contains('https')),
+            tokenStorage: TokenStorage.delegate(() => token1, (value) => token1 = value),
+          );
 
-  test('client authenticates', () async {
-    final response = await magxClient.authenticateGuest(deviceId: 'random_id');
-    expect(response.isSuccessful, isTrue);
-    final body = response.body;
-    expect(body.id, equals('5fdc98658804d60017bfbe05'));
-    expect(body.token, equals('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'));
-    expect(body.data, equals({}));
-  });
+          final data1 = await client.authenticateGuest(deviceId: Uuid().v4());
+          token1 = data1.body.token;
+        } catch (_) {}
+      });
 
-  test('client verifies', () async {
-    tokenStorage.save('random_token');
-    final response = await magxClient.verify();
-    expect(response.isSuccessful, isTrue);
-    final body = response.body;
-    expect(body.token, equals('random_token'));
-  });
+      tearDown(() {
+        client = null;
+        token1 = null;
+      });
+
+      test('client authenticates', () async {
+        final response = await client.authenticateGuest(deviceId: 'random_id');
+        expect(response.isSuccessful, isTrue);
+      });
+
+      test('client verifies', () async {
+        client.authenticateGuest(deviceId: 'random_device');
+        final response = await client.verify();
+        expect(response.isSuccessful, isTrue);
+      });
+
+      test('get rooms', () async {
+        final room1 = await client.create('chat');
+        final rooms = await client.getRooms();
+        expect(rooms.isSuccessful, isTrue);
+        expect(rooms.body, hasLength(1));
+        expect(rooms.body.first, isA<RoomDescription>());
+        expect(rooms.body.first.id, equals(room1.body.id));
+      });
+    },
+    skip: !(await integrationServerAvailable),
+  );
 }

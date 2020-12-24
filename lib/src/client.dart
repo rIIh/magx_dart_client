@@ -133,9 +133,11 @@ class MagxClient {
             : value.copyWith(body: null),
       );
 
-  Future<Response<Iterable<dynamic>>> getRooms(List<String> names) => api.service.getRooms(names).then(
+  Future<Response<Iterable<RoomDescription>>> getRooms([List<String> names]) => api.service.getRooms(names ?? []).then(
         (value) => value.copyWith(
-          body: value.body != null ? value.body as Iterable<dynamic> : null,
+          body: value.body != null
+              ? (value.body as Iterable<dynamic>).cast<Map<String, dynamic>>().map($RoomDescription.fromJson)
+              : null,
         ),
       );
 
