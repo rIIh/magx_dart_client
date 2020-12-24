@@ -1,3 +1,16 @@
+## [2.0.0](https://github.com/rIIh/magx_dart_client/compare/v1.0.4...v2.0.0) (2020-12-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **client:** `joinRoom` method renamed to `connect`
+* **client:** return types changed
+
+### Features
+
+* **client:** add missing return types to get_rooms method ([72d1428](https://github.com/rIIh/magx_dart_client/commit/72d1428e733bd43d17bcbb4f5f8cae42df07b7c1))
+* **client:** add reconnect support ([6a08ed0](https://github.com/rIIh/magx_dart_client/commit/6a08ed0455e00edc309b9f2b514fe851ebfddcae))
+
 ### [1.0.4](https://github.com/rIIh/magx_dart_client/compare/v1.0.3...v1.0.4) (2020-12-23)
 
 
