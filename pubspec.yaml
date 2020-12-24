@@ -1,6 +1,6 @@
 name: magx_client
 description: Dart Client for MagX multiplayer game server.
-version: 2.0.0
+version: 2.0.1
 repository: https://github.com/rIIh/magx_dart_client
 
 environment:

@@ -1,3 +1,10 @@
+### [2.0.1](https://github.com/rIIh/magx_dart_client/compare/v2.0.0...v2.0.1) (2020-12-24)
+
+
+### Bug Fixes
+
+* **serializable:** change shallow toJson implementation to deep toJson ([4b16aca](https://github.com/rIIh/magx_dart_client/commit/4b16aca73495920997b986810e89feec984b9598))
+
 ## [2.0.0](https://github.com/rIIh/magx_dart_client/compare/v1.0.4...v2.0.0) (2020-12-24)
 
 
