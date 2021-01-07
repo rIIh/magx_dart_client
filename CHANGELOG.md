@@ -1,3 +1,10 @@
+## [3.1.0](https://github.com/rIIh/magx_dart_client/compare/v3.0.0...v3.1.0) (2021-01-07)
+
+
+### Features
+
+* add reconnect field to connect method ([6362e78](https://github.com/rIIh/magx_dart_client/commit/6362e78724f0ea918906ef008baee5654ef60551))
+
 ## [3.0.0](https://github.com/rIIh/magx_dart_client/compare/v2.0.1...v3.0.0) (2021-01-07)
 
 
