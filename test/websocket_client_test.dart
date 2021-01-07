@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:magx_client/src/client.dart';
 import 'package:magx_client/src/connection/connection.dart';
-import 'package:magx_client/src/connection/ws_connection.dart';
 import 'package:magx_client/src/room/room.dart';
 import 'package:magx_client/src/token_storage.dart';
 import 'package:test/test.dart';
@@ -67,14 +66,14 @@ void main() async {
       });
 
       test('creates room successfully', () async {
-        final room = await client1.create('chat');
+        final room = await client1.createAndConnect('chat');
         expect(room.isSuccessful, isTrue);
         activeConnections.add(room.body);
         expectLater(room.body.stream, emits(equals(Message.connected())));
       });
 
       test('can join room', () async {
-        final room = await client1.create('chat');
+        final room = await client1.createAndConnect('chat');
         expect(room.isSuccessful, isTrue);
         activeConnections.add(room.body);
         expectLater(room.body.stream, emits(equals(Message.connected())));
@@ -84,7 +83,7 @@ void main() async {
       });
 
       test('reconnects successfully', () async {
-        final room = await client1.create('mosx-chat');
+        final room = await client1.createAndConnect('mosx-chat');
         expect(room.isSuccessful, isTrue);
         room.body.stream.listen((message) => print('1: ${message.toString()}'));
         activeConnections.add(room.body);
@@ -109,7 +108,7 @@ void main() async {
       });
 
       test('messaging in room successfully', () async {
-        final createdRoom = await client1.create('chat');
+        final createdRoom = await client1.createAndConnect('chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));
@@ -153,7 +152,7 @@ void main() async {
       });
 
       test('receives snapshots and patches', () async {
-        final createdRoom = await client1.create('mosx-chat');
+        final createdRoom = await client1.createAndConnect('mosx-chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body);
         createdRoom.body.stream.listen((message) => print('1: ${message.toString()}'));

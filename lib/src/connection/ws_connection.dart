@@ -28,7 +28,7 @@ class WSConnection implements Connection {
       (data) {
         if (_closed != true) {
           final event = Deserializer(Uint8List.fromList([data.first])).decode();
-          final args = Deserializer(Uint8List.fromList(data.skip(1).toList())).decode();
+          var args = Deserializer(Uint8List.fromList(data.skip(1).toList())).decode();
           _messages.add(Message.fromJson({'event': event, 'data': args}));
         }
       },

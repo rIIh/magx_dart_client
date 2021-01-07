@@ -168,7 +168,18 @@ class MagxClient {
 
   Future leaveRoom(String id) => api.service.leaveRoom(id);
 
-  Future<Response<Room>> create(String name, {Map<String, dynamic> options}) async {
+  Future<Response<RoomData>> create(String name, {Map<String, dynamic> options}) async {
+    final data = await api.service.createRoom(CreateRoomPayload(name, options)).then(
+          (value) => value.isSuccessful
+              ? value.copyWith(
+                  body: RoomData.fromJson(value.body),
+                )
+              : value.copyWith(body: null),
+        );
+    return data;
+  }
+
+  Future<Response<Room>> createAndConnect(String name, {Map<String, dynamic> options}) async {
     final data = await api.service.createRoom(CreateRoomPayload(name, options)).then(
           (value) => value.isSuccessful
               ? value.copyWith(
