@@ -1,3 +1,14 @@
+## [3.0.0](https://github.com/rIIh/magx_dart_client/compare/v2.0.1...v3.0.0) (2021-01-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* 'create' return type changed from 'Room' to 'RoomData'
+
+### Features
+
+* replace create return parameter ([6f12fb3](https://github.com/rIIh/magx_dart_client/commit/6f12fb302768c3152a79a672aea2da3f92e2579a))
+
 ### [2.0.1](https://github.com/rIIh/magx_dart_client/compare/v2.0.0...v2.0.1) (2020-12-24)
 
 
