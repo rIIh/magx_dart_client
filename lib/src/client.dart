@@ -141,7 +141,7 @@ class MagxClient {
         ),
       );
 
-  Future<Room> connect(String id) async {
+  Future<Room> connect(String id, {bool reconnect}) async {
     final user = await verify();
     final descriptionResponse = await getRoom(id);
     if (descriptionResponse.isSuccessful == false || user.isSuccessful == false) {
@@ -150,7 +150,7 @@ class MagxClient {
     final description = descriptionResponse.body;
     print('[MagxClient.connect]: ${description.clients}');
     if (description.clients.contains(user.body.id)) {
-      return _connectRoom(RoomData.fromJson(description.toJson()), reconnect: true);
+      return _connectRoom(RoomData.fromJson(description.toJson()), reconnect: reconnect ?? true);
     } else {
       final joinResponse = await api.service.joinRoom(description.id).then(
             (value) => value.isSuccessful
@@ -160,7 +160,7 @@ class MagxClient {
                   ),
           );
       if (joinResponse.isSuccessful) {
-        return _connectRoom(joinResponse.body);
+        return _connectRoom(joinResponse.body, reconnect: false);
       }
     }
     return null;
@@ -188,7 +188,7 @@ class MagxClient {
               : value.copyWith(body: null),
         );
     if (data.isSuccessful) {
-      return data.copyWith(body: await _connectRoom(data.body));
+      return data.copyWith(body: await _connectRoom(data.body, reconnect: false));
     }
     return data.copyWith(body: null);
   }
