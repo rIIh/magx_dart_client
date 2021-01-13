@@ -1,3 +1,10 @@
+### [3.1.1](https://github.com/rIIh/magx_dart_client/compare/v3.1.0...v3.1.1) (2021-01-13)
+
+
+### Bug Fixes
+
+* put options to join request ([bf2305a](https://github.com/rIIh/magx_dart_client/commit/bf2305a8f35cc3ea3d5843a8c68ecec8383692d8))
+
 ## [3.1.0](https://github.com/rIIh/magx_dart_client/compare/v3.0.0...v3.1.0) (2021-01-07)
 
 
