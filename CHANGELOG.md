@@ -1,3 +1,10 @@
+### [3.1.2](https://github.com/rIIh/magx_dart_client/compare/v3.1.1...v3.1.2) (2021-02-24)
+
+
+### Bug Fixes
+
+* fix options payload type ([001c4a9](https://github.com/rIIh/magx_dart_client/commit/001c4a9c135162319ec65570795bce7dd480b8e3))
+
 ### [3.1.1](https://github.com/rIIh/magx_dart_client/compare/v3.1.0...v3.1.1) (2021-01-13)
 
 
