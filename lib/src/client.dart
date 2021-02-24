@@ -152,13 +152,18 @@ class MagxClient {
     if (description.clients.contains(user.body.id)) {
       return _connectRoom(RoomData.fromJson(description.toJson()), reconnect: reconnect ?? true);
     } else {
-      final joinResponse = await api.service.joinRoom(description.id, options: options).then(
-            (value) => value.isSuccessful
-                ? value.copyWith(body: RoomData.fromJson(value.body))
-                : value.copyWith(
-                    body: null,
-                  ),
-          );
+      final joinResponse = await api.service.joinRoom(
+        description.id,
+        options: {
+          'options': options,
+        },
+      ).then(
+        (value) => value.isSuccessful
+            ? value.copyWith(body: RoomData.fromJson(value.body))
+            : value.copyWith(
+                body: null,
+              ),
+      );
       if (joinResponse.isSuccessful) {
         return _connectRoom(joinResponse.body, reconnect: false);
       }
