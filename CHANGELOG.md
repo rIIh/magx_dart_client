@@ -1,3 +1,10 @@
+## [3.2.0](https://github.com/rIIh/magx_dart_client/compare/v3.1.2...v3.2.0) (2021-03-06)
+
+
+### Features
+
+* **auth:** add apple authentication method implementation ([8c65b3c](https://github.com/rIIh/magx_dart_client/commit/8c65b3c43f1382725b60d58e49b205af5486dc2a))
+
 ### [3.1.2](https://github.com/rIIh/magx_dart_client/compare/v3.1.1...v3.1.2) (2021-02-24)
 
 
