@@ -2,6 +2,7 @@ import 'package:chopper/chopper.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'service.chopper.dart';
+
 part 'service.g.dart';
 
 @JsonSerializable()
@@ -12,6 +13,7 @@ class CreateRoomPayload {
   CreateRoomPayload(this.name, this.options);
 
   factory CreateRoomPayload.fromJson(Map<String, dynamic> json) => _$CreateRoomPayloadFromJson(json);
+
   Map<String, dynamic> toJson() => _$CreateRoomPayloadToJson(this);
 }
 
@@ -67,7 +69,13 @@ class MagxService extends _$_MagxService implements _MagxService {
     );
   }
 
-  Future<Response> authenticateApple({@required String accessToken, String fmsToken}) => throw UnimplementedError();
+  Future<Response> authenticateApple({@required String accessToken, String fmsToken}) {
+    return _authenticate(wrapWithData({
+      'type': 'apple',
+      'id_token': accessToken,
+      'mToken': fmsToken,
+    }));
+  }
 
   @override
   Type get definitionType => MagxService;
