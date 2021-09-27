@@ -10,23 +10,28 @@ import 'package:uuid/uuid.dart';
 import 'mock/check_integration_target.dart';
 
 void main() async {
-  test('websocket connects normally', () async {
-    final websocket = await WebSocket.connect('ws://echo.websocket.org');
-    final stream = websocket.asBroadcastStream();
-    expectLater(
-      stream,
-      emitsInOrder(
-        [
-          emits(equals('test message')),
-          emits(equals('test message')),
-          emitsDone,
-        ],
-      ),
-    );
-    websocket.add('test message');
-    websocket.add('test message');
-    websocket.close();
-  }, timeout: Timeout(Duration(seconds: 5)));
+  test(
+    'websocket connects normally',
+    () async {
+      final websocket = await WebSocket.connect('ws://echo.websocket.org');
+      final stream = websocket.asBroadcastStream();
+      expectLater(
+        stream,
+        emitsInOrder(
+          [
+            emits(equals('test message')),
+            emits(equals('test message')),
+            emitsDone,
+          ],
+        ),
+      );
+      websocket.add('test message');
+      websocket.add('test message');
+      websocket.close();
+    },
+    timeout: Timeout(Duration(seconds: 5)),
+    skip: 'websocket.org is not available anymore',
+  );
 
   group(
     'magx websocket client tests',
