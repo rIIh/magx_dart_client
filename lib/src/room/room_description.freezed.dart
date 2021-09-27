@@ -18,13 +18,7 @@ class _$RoomDescriptionTearOff {
 
 // ignore: unused_element
   _RoomDescription call(
-      {String id,
-      int pid,
-      String hostId,
-      String name,
-      bool locked,
-      List<String> clients,
-      Data data}) {
+      {String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data}) {
     return _RoomDescription(
       id: id,
       pid: pid,
@@ -49,7 +43,7 @@ const $RoomDescription = _$RoomDescriptionTearOff();
 /// @nodoc
 mixin _$RoomDescription {
   String get id;
-  int get pid;
+  String get pid;
   String get hostId;
   String get name;
   bool get locked;
@@ -62,24 +56,15 @@ mixin _$RoomDescription {
 
 /// @nodoc
 abstract class $RoomDescriptionCopyWith<$Res> {
-  factory $RoomDescriptionCopyWith(
-          RoomDescription value, $Res Function(RoomDescription) then) =
+  factory $RoomDescriptionCopyWith(RoomDescription value, $Res Function(RoomDescription) then) =
       _$RoomDescriptionCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      int pid,
-      String hostId,
-      String name,
-      bool locked,
-      List<String> clients,
-      Data data});
+  $Res call({String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data});
 
   $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
-class _$RoomDescriptionCopyWithImpl<$Res>
-    implements $RoomDescriptionCopyWith<$Res> {
+class _$RoomDescriptionCopyWithImpl<$Res> implements $RoomDescriptionCopyWith<$Res> {
   _$RoomDescriptionCopyWithImpl(this._value, this._then);
 
   final RoomDescription _value;
@@ -98,7 +83,7 @@ class _$RoomDescriptionCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
-      pid: pid == freezed ? _value.pid : pid as int,
+      pid: pid == freezed ? _value.pid : pid as String,
       hostId: hostId == freezed ? _value.hostId : hostId as String,
       name: name == freezed ? _value.name : name as String,
       locked: locked == freezed ? _value.locked : locked as bool,
@@ -119,31 +104,20 @@ class _$RoomDescriptionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$RoomDescriptionCopyWith<$Res>
-    implements $RoomDescriptionCopyWith<$Res> {
-  factory _$RoomDescriptionCopyWith(
-          _RoomDescription value, $Res Function(_RoomDescription) then) =
+abstract class _$RoomDescriptionCopyWith<$Res> implements $RoomDescriptionCopyWith<$Res> {
+  factory _$RoomDescriptionCopyWith(_RoomDescription value, $Res Function(_RoomDescription) then) =
       __$RoomDescriptionCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String id,
-      int pid,
-      String hostId,
-      String name,
-      bool locked,
-      List<String> clients,
-      Data data});
+  $Res call({String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data});
 
   @override
   $DataCopyWith<$Res> get data;
 }
 
 /// @nodoc
-class __$RoomDescriptionCopyWithImpl<$Res>
-    extends _$RoomDescriptionCopyWithImpl<$Res>
+class __$RoomDescriptionCopyWithImpl<$Res> extends _$RoomDescriptionCopyWithImpl<$Res>
     implements _$RoomDescriptionCopyWith<$Res> {
-  __$RoomDescriptionCopyWithImpl(
-      _RoomDescription _value, $Res Function(_RoomDescription) _then)
+  __$RoomDescriptionCopyWithImpl(_RoomDescription _value, $Res Function(_RoomDescription) _then)
       : super(_value, (v) => _then(v as _RoomDescription));
 
   @override
@@ -161,7 +135,7 @@ class __$RoomDescriptionCopyWithImpl<$Res>
   }) {
     return _then(_RoomDescription(
       id: id == freezed ? _value.id : id as String,
-      pid: pid == freezed ? _value.pid : pid as int,
+      pid: pid == freezed ? _value.pid : pid as String,
       hostId: hostId == freezed ? _value.hostId : hostId as String,
       name: name == freezed ? _value.name : name as String,
       locked: locked == freezed ? _value.locked : locked as bool,
@@ -175,22 +149,14 @@ class __$RoomDescriptionCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_RoomDescription implements _RoomDescription {
-  const _$_RoomDescription(
-      {this.id,
-      this.pid,
-      this.hostId,
-      this.name,
-      this.locked,
-      this.clients,
-      this.data});
+  const _$_RoomDescription({this.id, this.pid, this.hostId, this.name, this.locked, this.clients, this.data});
 
-  factory _$_RoomDescription.fromJson(Map<String, dynamic> json) =>
-      _$_$_RoomDescriptionFromJson(json);
+  factory _$_RoomDescription.fromJson(Map<String, dynamic> json) => _$_$_RoomDescriptionFromJson(json);
 
   @override
   final String id;
   @override
-  final int pid;
+  final String pid;
   @override
   final String hostId;
   @override
@@ -211,21 +177,13 @@ class _$_RoomDescription implements _RoomDescription {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _RoomDescription &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.pid, pid) ||
-                const DeepCollectionEquality().equals(other.pid, pid)) &&
-            (identical(other.hostId, hostId) ||
-                const DeepCollectionEquality().equals(other.hostId, hostId)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.locked, locked) ||
-                const DeepCollectionEquality().equals(other.locked, locked)) &&
-            (identical(other.clients, clients) ||
-                const DeepCollectionEquality()
-                    .equals(other.clients, clients)) &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.pid, pid) || const DeepCollectionEquality().equals(other.pid, pid)) &&
+            (identical(other.hostId, hostId) || const DeepCollectionEquality().equals(other.hostId, hostId)) &&
+            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.locked, locked) || const DeepCollectionEquality().equals(other.locked, locked)) &&
+            (identical(other.clients, clients) || const DeepCollectionEquality().equals(other.clients, clients)) &&
+            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
@@ -252,20 +210,19 @@ class _$_RoomDescription implements _RoomDescription {
 abstract class _RoomDescription implements RoomDescription {
   const factory _RoomDescription(
       {String id,
-      int pid,
+      String pid,
       String hostId,
       String name,
       bool locked,
       List<String> clients,
       Data data}) = _$_RoomDescription;
 
-  factory _RoomDescription.fromJson(Map<String, dynamic> json) =
-      _$_RoomDescription.fromJson;
+  factory _RoomDescription.fromJson(Map<String, dynamic> json) = _$_RoomDescription.fromJson;
 
   @override
   String get id;
   @override
-  int get pid;
+  String get pid;
   @override
   String get hostId;
   @override
@@ -310,8 +267,7 @@ mixin _$Data {
 
 /// @nodoc
 abstract class $DataCopyWith<$Res> {
-  factory $DataCopyWith(Data value, $Res Function(Data) then) =
-      _$DataCopyWithImpl<$Res>;
+  factory $DataCopyWith(Data value, $Res Function(Data) then) = _$DataCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -325,15 +281,12 @@ class _$DataCopyWithImpl<$Res> implements $DataCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$DataCopyWith<$Res> {
-  factory _$DataCopyWith(_Data value, $Res Function(_Data) then) =
-      __$DataCopyWithImpl<$Res>;
+  factory _$DataCopyWith(_Data value, $Res Function(_Data) then) = __$DataCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res>
-    implements _$DataCopyWith<$Res> {
-  __$DataCopyWithImpl(_Data _value, $Res Function(_Data) _then)
-      : super(_value, (v) => _then(v as _Data));
+class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res> implements _$DataCopyWith<$Res> {
+  __$DataCopyWithImpl(_Data _value, $Res Function(_Data) _then) : super(_value, (v) => _then(v as _Data));
 
   @override
   _Data get _value => super._value as _Data;
@@ -345,8 +298,7 @@ class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res>
 class _$_Data implements _Data {
   const _$_Data();
 
-  factory _$_Data.fromJson(Map<String, dynamic> json) =>
-      _$_$_DataFromJson(json);
+  factory _$_Data.fromJson(Map<String, dynamic> json) => _$_$_DataFromJson(json);
 
   @override
   String toString() {

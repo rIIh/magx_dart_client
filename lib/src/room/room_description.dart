@@ -7,7 +7,7 @@ part 'room_description.g.dart';
 abstract class RoomDescription with _$RoomDescription {
   const factory RoomDescription({
     String id,
-    int pid,
+    String pid,
     String hostId,
     String name,
     bool locked,
