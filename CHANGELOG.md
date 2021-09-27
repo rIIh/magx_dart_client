@@ -1,3 +1,10 @@
+## [3.3.0](https://github.com/rIIh/magx_dart_client/compare/v3.2.0...v3.3.0) (2021-09-27)
+
+
+### Features
+
+* change pid type from int to string ([12b4d8d](https://github.com/rIIh/magx_dart_client/commit/12b4d8d807088366b7f16c35d7f6a7a19b0f4759))
+
 ## [3.2.0](https://github.com/rIIh/magx_dart_client/compare/v3.1.2...v3.2.0) (2021-03-06)
 
 
