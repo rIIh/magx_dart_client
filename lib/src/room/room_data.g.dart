@@ -15,8 +15,7 @@ _$_RoomData _$_$_RoomDataFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_RoomDataToJson(_$_RoomData instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$_$_RoomDataToJson(_$_RoomData instance) => <String, dynamic>{
       'id': instance.id,
       'port': instance.port,
       'name': instance.name,

@@ -45,8 +45,7 @@ mixin _$Message {
 
 /// @nodoc
 abstract class $MessageCopyWith<$Res> {
-  factory $MessageCopyWith(Message value, $Res Function(Message) then) =
-      _$MessageCopyWithImpl<$Res>;
+  factory $MessageCopyWith(Message value, $Res Function(Message) then) = _$MessageCopyWithImpl<$Res>;
   $Res call({MessageEvent event, List<dynamic> data});
 }
 
@@ -72,17 +71,14 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
 
 /// @nodoc
 abstract class _$MessageCopyWith<$Res> implements $MessageCopyWith<$Res> {
-  factory _$MessageCopyWith(_Message value, $Res Function(_Message) then) =
-      __$MessageCopyWithImpl<$Res>;
+  factory _$MessageCopyWith(_Message value, $Res Function(_Message) then) = __$MessageCopyWithImpl<$Res>;
   @override
   $Res call({MessageEvent event, List<dynamic> data});
 }
 
 /// @nodoc
-class __$MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
-    implements _$MessageCopyWith<$Res> {
-  __$MessageCopyWithImpl(_Message _value, $Res Function(_Message) _then)
-      : super(_value, (v) => _then(v as _Message));
+class __$MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res> implements _$MessageCopyWith<$Res> {
+  __$MessageCopyWithImpl(_Message _value, $Res Function(_Message) _then) : super(_value, (v) => _then(v as _Message));
 
   @override
   _Message get _value => super._value as _Message;
@@ -105,8 +101,7 @@ class __$MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res>
 class _$_Message implements _Message {
   const _$_Message({this.event, this.data = const []}) : assert(data != null);
 
-  factory _$_Message.fromJson(Map<String, dynamic> json) =>
-      _$_$_MessageFromJson(json);
+  factory _$_Message.fromJson(Map<String, dynamic> json) => _$_$_MessageFromJson(json);
 
   @override
   final MessageEvent event;
@@ -123,21 +118,16 @@ class _$_Message implements _Message {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Message &&
-            (identical(other.event, event) ||
-                const DeepCollectionEquality().equals(other.event, event)) &&
-            (identical(other.data, data) ||
-                const DeepCollectionEquality().equals(other.data, data)));
+            (identical(other.event, event) || const DeepCollectionEquality().equals(other.event, event)) &&
+            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(event) ^
-      const DeepCollectionEquality().hash(data);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(event) ^ const DeepCollectionEquality().hash(data);
 
   @override
-  _$MessageCopyWith<_Message> get copyWith =>
-      __$MessageCopyWithImpl<_Message>(this, _$identity);
+  _$MessageCopyWith<_Message> get copyWith => __$MessageCopyWithImpl<_Message>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {

@@ -55,8 +55,7 @@ class _$_MagxService extends _MagxService {
   }
 
   @override
-  Future<Response<dynamic>> joinRoom(String id,
-      {Map<String, dynamic> options}) {
+  Future<Response<dynamic>> joinRoom(String id, {Map<String, dynamic> options}) {
     final $url = '/rooms/$id/join';
     final $body = options;
     final $request = Request('POST', $url, client.baseUrl, body: $body);

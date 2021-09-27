@@ -13,8 +13,7 @@ _$_Message _$_$_MessageFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_MessageToJson(_$_Message instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$_$_MessageToJson(_$_Message instance) => <String, dynamic>{
       'event': _$MessageEventEnumMap[instance.event],
       'data': instance.data,
     };
@@ -29,9 +28,7 @@ T _$enumDecode<T>(
         '${enumValues.values.join(', ')}');
   }
 
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
+  final value = enumValues.entries.singleWhere((e) => e.value == source, orElse: () => null)?.key;
 
   if (value == null && unknownValue == null) {
     throw ArgumentError('`$source` is not one of the supported values: '

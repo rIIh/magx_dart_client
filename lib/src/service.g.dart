@@ -13,8 +13,7 @@ CreateRoomPayload _$CreateRoomPayloadFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$CreateRoomPayloadToJson(CreateRoomPayload instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CreateRoomPayloadToJson(CreateRoomPayload instance) => <String, dynamic>{
       'name': instance.name,
       'options': instance.options,
     };
