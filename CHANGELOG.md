@@ -1,3 +1,14 @@
+## [4.0.0](https://github.com/rIIh/magx_dart_client/compare/v3.3.0...v4.0.0) (2021-10-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* null-safety support
+
+### Features
+
+* upgrade to null-safety ([ce1f67f](https://github.com/rIIh/magx_dart_client/commit/ce1f67f90cf99655d3185485de75424dbb613656))
+
 ## [3.3.0](https://github.com/rIIh/magx_dart_client/compare/v3.2.0...v3.3.0) (2021-09-27)
 
 
