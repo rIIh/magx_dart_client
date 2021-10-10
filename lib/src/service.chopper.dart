@@ -8,7 +8,7 @@ part of 'service.dart';
 
 // ignore_for_file: always_put_control_body_on_new_line, always_specify_types, prefer_const_declarations
 class _$_MagxService extends _MagxService {
-  _$_MagxService([ChopperClient client]) {
+  _$_MagxService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
@@ -25,7 +25,7 @@ class _$_MagxService extends _MagxService {
   }
 
   @override
-  Future<Response<dynamic>> verify({String token}) {
+  Future<Response<dynamic>> verify({String? token}) {
     final $url = '/auth/$token';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
@@ -55,7 +55,7 @@ class _$_MagxService extends _MagxService {
   }
 
   @override
-  Future<Response<dynamic>> joinRoom(String id, {Map<String, dynamic> options}) {
+  Future<Response<dynamic>> joinRoom(String id, {Map<String, dynamic>? options}) {
     final $url = '/rooms/$id/join';
     final $body = options;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
@@ -77,7 +77,7 @@ class _$_MagxService extends _MagxService {
   }
 
   @override
-  Future<Response<dynamic>> updateRoom(String id, {Map<String, dynamic> body}) {
+  Future<Response<dynamic>> updateRoom(String id, {Map<String, dynamic>? body}) {
     final $url = '/rooms/$id/update';
     final $body = body;
     final $request = Request('POST', $url, client.baseUrl, body: $body);

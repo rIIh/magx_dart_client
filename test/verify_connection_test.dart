@@ -5,7 +5,7 @@ import 'package:magx_client/src/client.dart';
 import 'package:test/test.dart';
 
 void main() async {
-  MagxClient client;
+  late MagxClient client;
 
   setUp(() {
     client = MagxClient(MagxClientParams(
@@ -14,7 +14,8 @@ void main() async {
     ));
   });
 
-  final testHostServer = Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
+  final testHostServer =
+      Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
   Future<bool> checkReady() async {
     return http.Client()
         .get(Uri.parse('$testHostServer/magx/'))

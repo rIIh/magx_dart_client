@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'connection.dart';
 
@@ -8,6 +9,10 @@ part of 'connection.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 Message _$MessageFromJson(Map<String, dynamic> json) {
   return _Message.fromJson(json);
 }
@@ -16,31 +21,29 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 class _$MessageTearOff {
   const _$MessageTearOff();
 
-// ignore: unused_element
-  _Message _({MessageEvent event, List<dynamic> data = const []}) {
+  _Message _({required MessageEvent event, List<dynamic> data = const []}) {
     return _Message(
       event: event,
       data: data,
     );
   }
 
-// ignore: unused_element
-  Message fromJson(Map<String, Object> json) {
+  Message fromJson(Map<String, Object?> json) {
     return Message.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Message = _$MessageTearOff();
 
 /// @nodoc
 mixin _$Message {
-  MessageEvent get event;
-  List<dynamic> get data;
+  MessageEvent get event => throw _privateConstructorUsedError;
+  List<dynamic> get data => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $MessageCopyWith<Message> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MessageCopyWith<Message> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -59,12 +62,18 @@ class _$MessageCopyWithImpl<$Res> implements $MessageCopyWith<$Res> {
 
   @override
   $Res call({
-    Object event = freezed,
-    Object data = freezed,
+    Object? event = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
-      event: event == freezed ? _value.event : event as MessageEvent,
-      data: data == freezed ? _value.data : data as List<dynamic>,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as MessageEvent,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
@@ -85,23 +94,28 @@ class __$MessageCopyWithImpl<$Res> extends _$MessageCopyWithImpl<$Res> implement
 
   @override
   $Res call({
-    Object event = freezed,
-    Object data = freezed,
+    Object? event = freezed,
+    Object? data = freezed,
   }) {
     return _then(_Message(
-      event: event == freezed ? _value.event : event as MessageEvent,
-      data: data == freezed ? _value.data : data as List<dynamic>,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as MessageEvent,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Message implements _Message {
-  const _$_Message({this.event, this.data = const []}) : assert(data != null);
+  const _$_Message({required this.event, this.data = const []});
 
-  factory _$_Message.fromJson(Map<String, dynamic> json) => _$_$_MessageFromJson(json);
+  factory _$_Message.fromJson(Map<String, dynamic> json) => _$$_MessageFromJson(json);
 
   @override
   final MessageEvent event;
@@ -117,26 +131,27 @@ class _$_Message implements _Message {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Message &&
-            (identical(other.event, event) || const DeepCollectionEquality().equals(other.event, event)) &&
-            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
+        (other.runtimeType == runtimeType &&
+            other is _Message &&
+            (identical(other.event, event) || other.event == event) &&
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(event) ^ const DeepCollectionEquality().hash(data);
+  int get hashCode => Object.hash(runtimeType, event, const DeepCollectionEquality().hash(data));
 
+  @JsonKey(ignore: true)
   @override
   _$MessageCopyWith<_Message> get copyWith => __$MessageCopyWithImpl<_Message>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_MessageToJson(this);
+    return _$$_MessageToJson(this);
   }
 }
 
 abstract class _Message implements Message {
-  const factory _Message({MessageEvent event, List<dynamic> data}) = _$_Message;
+  const factory _Message({required MessageEvent event, List<dynamic> data}) = _$_Message;
 
   factory _Message.fromJson(Map<String, dynamic> json) = _$_Message.fromJson;
 
@@ -145,5 +160,6 @@ abstract class _Message implements Message {
   @override
   List<dynamic> get data;
   @override
-  _$MessageCopyWith<_Message> get copyWith;
+  @JsonKey(ignore: true)
+  _$MessageCopyWith<_Message> get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,8 +12,8 @@ import 'service.dart';
 import 'token_storage.dart';
 
 class Authentication {
-  final String id;
-  final String token;
+  final String? id;
+  final String? token;
   final dynamic data;
 
   Authentication({
@@ -31,7 +31,7 @@ class Authentication {
 
 class CTParams {
   final String url;
-  final List<String> protocols;
+  final List<String>? protocols;
 
   CTParams(this.url, {this.protocols});
 }
@@ -39,16 +39,16 @@ class CTParams {
 typedef ConnectionBuilder = Connection Function(CTParams params);
 
 class MagxClientParams {
-  final num port;
+  final num? port;
   final String address;
   final bool secure;
-  final String id;
-  final String token;
+  final String? id;
+  final String? token;
   final dynamic data;
-  final ConnectionBuilder transport;
+  final ConnectionBuilder? transport;
 
   MagxClientParams({
-    @required this.address,
+    required this.address,
     this.secure = false,
     this.port,
     this.id,
@@ -59,13 +59,13 @@ class MagxClientParams {
 }
 
 class MagxClient {
-  final TokenStorage tokenStorage;
+  final TokenStorage? tokenStorage;
   @visibleForTesting
-  MagxApiClient api;
+  late MagxApiClient api;
 
-  String address;
-  bool secure;
-  num port;
+  String? address;
+  late bool secure;
+  num? port;
   final ConnectionBuilder transport;
 
   String get uri => '${secure ? "https" : "http"}://$address${port != null ? ":$port" : ""}/magx';
@@ -73,10 +73,10 @@ class MagxClient {
   MagxClient(
     MagxClientParams params, {
     this.tokenStorage,
-    http.Client client,
+    http.Client? client,
     Iterable interceptors = const [],
   }) : transport = params.transport ?? ((p) => WSConnection(p)) {
-    address = params.address ?? 'localhost';
+    address = params.address;
     port = params.port;
     secure = params.secure;
 
@@ -88,7 +88,7 @@ class MagxClient {
     );
   }
 
-  Future<Response<Authentication>> authenticateGuest({@required String deviceId, String fmsToken}) => api.service
+  Future<Response<Authentication>> authenticateGuest({required String deviceId, String? fmsToken}) => api.service
       .authenticateGuest(
         deviceId: deviceId,
         fmsToken: fmsToken,
@@ -97,7 +97,7 @@ class MagxClient {
         (value) => value.copyWith(body: value.body != null ? Authentication.fromJson(value.body) : null),
       );
 
-  Future<Response<Authentication>> authenticateGoogle({@required String accessToken, String fmsToken}) {
+  Future<Response<Authentication>> authenticateGoogle({required String accessToken, String? fmsToken}) {
     return api.service
         .authenticateGoogle(
           accessToken: accessToken,
@@ -108,7 +108,7 @@ class MagxClient {
         );
   }
 
-  Future<Response<Authentication>> authenticateApple({@required String accessToken, String fmsToken}) => api.service
+  Future<Response<Authentication>> authenticateApple({required String accessToken, String? fmsToken}) => api.service
       .authenticateApple(
         accessToken: accessToken,
         fmsToken: fmsToken,
@@ -117,10 +117,10 @@ class MagxClient {
         (value) => value.copyWith(body: value.body != null ? Authentication.fromJson(value.body) : null),
       );
 
-  Future<Response<Authentication>> verify({String token}) {
+  Future<Response<Authentication>> verify({String? token}) {
     return api.service
         .verify(
-          token: token ?? tokenStorage.token,
+          token: token ?? tokenStorage!.token,
         )
         .then(
           (value) => value.copyWith(body: value.body != null ? Authentication.fromJson(value.body) : null),
@@ -133,23 +133,27 @@ class MagxClient {
             : value.copyWith(body: null),
       );
 
-  Future<Response<Iterable<RoomDescription>>> getRooms([List<String> names]) => api.service.getRooms(names ?? []).then(
-        (value) => value.copyWith(
-          body: value.body != null
-              ? (value.body as Iterable<dynamic>).cast<Map<String, dynamic>>().map($RoomDescription.fromJson)
-              : null,
-        ),
+  Future<Response<Iterable<RoomDescription>>> getRooms([List<String>? names]) => api.service.getRooms(names ?? []).then(
+        (value) {
+          final jsonList = value.body as List<dynamic>;
+          final jsonMappedList = jsonList.map((e) => (e as Map).cast<String, dynamic>());
+          final descriptions = jsonMappedList.map($RoomDescription.fromJson).toList();
+
+          return value.copyWith(
+            body: value.body != null ? descriptions : null,
+          );
+        },
       );
 
-  Future<Room> connect(String id, {bool reconnect, Map<String, dynamic> options}) async {
+  Future<Room?> connect(String id, {bool? reconnect, Map<String, dynamic>? options}) async {
     final user = await verify();
     final descriptionResponse = await getRoom(id);
     if (descriptionResponse.isSuccessful == false || user.isSuccessful == false) {
       return null;
     }
-    final description = descriptionResponse.body;
+    final description = descriptionResponse.body!;
     print('[MagxClient.connect]: ${description.clients}');
-    if (description.clients.contains(user.body.id)) {
+    if (description.clients.contains(user.body!.id)) {
       return _connectRoom(RoomData.fromJson(description.toJson()), reconnect: reconnect ?? true);
     } else {
       final joinResponse = await api.service.joinRoom(
@@ -165,7 +169,7 @@ class MagxClient {
               ),
       );
       if (joinResponse.isSuccessful) {
-        return _connectRoom(joinResponse.body, reconnect: false);
+        return _connectRoom(joinResponse.body!, reconnect: false);
       }
     }
     return null;
@@ -173,7 +177,7 @@ class MagxClient {
 
   Future leaveRoom(String id) => api.service.leaveRoom(id);
 
-  Future<Response<RoomData>> create(String name, {Map<String, dynamic> options}) async {
+  Future<Response<RoomData?>> create(String name, {Map<String, dynamic>? options}) async {
     final data = await api.service.createRoom(CreateRoomPayload(name, options)).then(
           (value) => value.isSuccessful
               ? value.copyWith(
@@ -184,7 +188,7 @@ class MagxClient {
     return data;
   }
 
-  Future<Response<Room>> createAndConnect(String name, {Map<String, dynamic> options}) async {
+  Future<Response<Room>> createAndConnect(String name, {Map<String, dynamic>? options}) async {
     final data = await api.service.createRoom(CreateRoomPayload(name, options)).then(
           (value) => value.isSuccessful
               ? value.copyWith(
@@ -193,12 +197,12 @@ class MagxClient {
               : value.copyWith(body: null),
         );
     if (data.isSuccessful) {
-      return data.copyWith(body: await _connectRoom(data.body, reconnect: false));
+      return data.copyWith(body: await _connectRoom(data.body!, reconnect: false));
     }
     return data.copyWith(body: null);
   }
 
-  Future<Room> _connectRoom(RoomData data, {bool reconnect}) async => Room(
+  Future<Room> _connectRoom(RoomData data, {bool? reconnect}) async => Room(
         this,
         data,
       ).ready.then(

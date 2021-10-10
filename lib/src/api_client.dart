@@ -5,16 +5,16 @@ import 'service.dart';
 import 'token_storage.dart';
 
 class MagxApiClient extends ChopperClient {
-  TokenStorage tokenProvider;
+  TokenStorage? tokenProvider;
 
   MagxService get service => getService();
 
   MagxApiClient._({
     String baseUrl = '',
-    http.Client client,
+    http.Client? client,
     Iterable interceptors = const [],
-    Converter converter,
-    ErrorConverter errorConverter,
+    Converter? converter,
+    ErrorConverter? errorConverter,
     Iterable<ChopperService> services = const [],
     this.tokenProvider,
   }) : super(
@@ -27,9 +27,9 @@ class MagxApiClient extends ChopperClient {
         );
 
   factory MagxApiClient.create({
-    String baseUrl,
-    TokenStorage tokenStorage,
-    http.Client client,
+    required String baseUrl,
+    TokenStorage? tokenStorage,
+    http.Client? client,
     Iterable interceptors = const [],
   }) =>
       MagxApiClient._(
@@ -44,11 +44,11 @@ class MagxApiClient extends ChopperClient {
         interceptors: [
           (Request request) {
             if (tokenStorage != null && tokenStorage.token?.isNotEmpty == true) {
-              return applyHeader(request, 'Authorization', tokenStorage.token);
+              return applyHeader(request, 'Authorization', tokenStorage.token!);
             }
             return request;
           },
-          ...(interceptors ?? const []),
+          ...(interceptors),
         ],
       );
 }

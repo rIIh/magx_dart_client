@@ -6,9 +6,9 @@ part 'room_data.g.dart';
 @freezed
 abstract class RoomData with _$RoomData {
   const factory RoomData({
-    @required String id,
-    num port,
-    @required String name,
+    required String id,
+    required String name,
+    int? port,
     @Default({}) Map<String, dynamic> options,
   }) = _RoomData;
 

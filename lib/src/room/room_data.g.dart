@@ -6,18 +6,16 @@ part of 'room_data.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RoomData _$_$_RoomDataFromJson(Map<String, dynamic> json) {
-  return _$_RoomData(
-    id: json['id'] as String,
-    port: json['port'] as num,
-    name: json['name'] as String,
-    options: json['options'] as Map<String, dynamic> ?? {},
-  );
-}
+_$_RoomData _$$_RoomDataFromJson(Map<String, dynamic> json) => _$_RoomData(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      port: json['port'] as int?,
+      options: json['options'] as Map<String, dynamic>? ?? {},
+    );
 
-Map<String, dynamic> _$_$_RoomDataToJson(_$_RoomData instance) => <String, dynamic>{
+Map<String, dynamic> _$$_RoomDataToJson(_$_RoomData instance) => <String, dynamic>{
       'id': instance.id,
-      'port': instance.port,
       'name': instance.name,
+      'port': instance.port,
       'options': instance.options,
     };

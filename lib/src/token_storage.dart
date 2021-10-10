@@ -1,13 +1,13 @@
 abstract class TokenStorage {
-  String get token;
+  String? get token;
 
   void save(String token);
 
   factory TokenStorage.delegate(TokenGetter getter, TokenSetter setter) => _DelegateTokenStorage(getter, setter);
 }
 
-typedef TokenGetter = String Function();
-typedef TokenSetter = void Function(String token);
+typedef TokenGetter = String? Function();
+typedef TokenSetter = void Function(String? token);
 
 class _DelegateTokenStorage implements TokenStorage {
   final TokenGetter get;
@@ -19,11 +19,11 @@ class _DelegateTokenStorage implements TokenStorage {
   void save(String token) => set(token);
 
   @override
-  String get token => get();
+  String? get token => get();
 }
 
 class MemoryTokenStorage implements TokenStorage {
-  String _token;
+  String? _token;
 
   MemoryTokenStorage();
 
@@ -31,5 +31,5 @@ class MemoryTokenStorage implements TokenStorage {
   void save(String token) => _token = token;
 
   @override
-  String get token => _token;
+  String? get token => _token;
 }

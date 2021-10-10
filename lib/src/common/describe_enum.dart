@@ -1,4 +1,4 @@
-String describeEnum(Object enumEntry) {
+String describeEnum(Object? enumEntry) {
   final description = enumEntry.toString();
   final indexOfDot = description.indexOf('.');
   assert(

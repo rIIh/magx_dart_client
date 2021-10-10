@@ -10,12 +10,12 @@ import 'connection.dart';
 
 class WSConnection implements Connection {
   bool _closed = false;
-  Subject<Message> _messages;
+  Subject<Message>? _messages;
   @visibleForTesting
-  WebSocket ws;
+  late WebSocket ws;
 
   @override
-  Stream<Message> get stream => _messages;
+  Stream<Message>? get stream => _messages;
 
   WSConnection(CTParams params) {
     _messages = BehaviorSubject();
@@ -29,13 +29,13 @@ class WSConnection implements Connection {
         if (_closed != true) {
           final event = Deserializer(Uint8List.fromList([data.first])).decode();
           var args = Deserializer(Uint8List.fromList(data.skip(1).toList())).decode();
-          _messages.add(Message.fromJson({'event': event, 'data': args}));
+          _messages!.add(Message.fromJson({'event': event, 'data': args}));
         }
       },
       onError: print,
       onDone: () {
         if (_closed != true) {
-          _messages.add(Message.closed(ws.closeCode, ws.closeReason));
+          _messages!.add(Message.closed(ws.closeCode, ws.closeReason));
           dispose();
           _closed = true;
         }
@@ -48,15 +48,13 @@ class WSConnection implements Connection {
   void send(Message message) {
     final packer = Serializer();
     packer.encode(encode(message.event));
-    if (message.data != null) {
-      packer.encode(message.data);
-    }
+    packer.encode(message.data);
     ws.add(packer.takeBytes().toList());
   }
 
   @override
   void dispose() {
-    ws.close(WebSocketStatus.normalClosure, 'Client disposed').then((value) => _messages.close());
+    ws.close(WebSocketStatus.normalClosure, 'Client disposed').then((value) => _messages!.close());
     _closed = true;
   }
 }

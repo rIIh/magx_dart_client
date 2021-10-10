@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'room_description.dart';
 
@@ -8,6 +9,10 @@ part of 'room_description.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 RoomDescription _$RoomDescriptionFromJson(Map<String, dynamic> json) {
   return _RoomDescription.fromJson(json);
 }
@@ -16,9 +21,14 @@ RoomDescription _$RoomDescriptionFromJson(Map<String, dynamic> json) {
 class _$RoomDescriptionTearOff {
   const _$RoomDescriptionTearOff();
 
-// ignore: unused_element
   _RoomDescription call(
-      {String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data}) {
+      {required String id,
+      @_PidConverter() required String pid,
+      required String hostId,
+      required String name,
+      required bool locked,
+      List<String> clients = const [],
+      required Data data}) {
     return _RoomDescription(
       id: id,
       pid: pid,
@@ -30,35 +40,42 @@ class _$RoomDescriptionTearOff {
     );
   }
 
-// ignore: unused_element
-  RoomDescription fromJson(Map<String, Object> json) {
+  RoomDescription fromJson(Map<String, Object?> json) {
     return RoomDescription.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $RoomDescription = _$RoomDescriptionTearOff();
 
 /// @nodoc
 mixin _$RoomDescription {
-  String get id;
-  String get pid;
-  String get hostId;
-  String get name;
-  bool get locked;
-  List<String> get clients;
-  Data get data;
+  String get id => throw _privateConstructorUsedError;
+  @_PidConverter()
+  String get pid => throw _privateConstructorUsedError;
+  String get hostId => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  bool get locked => throw _privateConstructorUsedError;
+  List<String> get clients => throw _privateConstructorUsedError;
+  Data get data => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson();
-  $RoomDescriptionCopyWith<RoomDescription> get copyWith;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $RoomDescriptionCopyWith<RoomDescription> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $RoomDescriptionCopyWith<$Res> {
   factory $RoomDescriptionCopyWith(RoomDescription value, $Res Function(RoomDescription) then) =
       _$RoomDescriptionCopyWithImpl<$Res>;
-  $Res call({String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data});
+  $Res call(
+      {String id,
+      @_PidConverter() String pid,
+      String hostId,
+      String name,
+      bool locked,
+      List<String> clients,
+      Data data});
 
   $DataCopyWith<$Res> get data;
 }
@@ -73,30 +90,48 @@ class _$RoomDescriptionCopyWithImpl<$Res> implements $RoomDescriptionCopyWith<$R
 
   @override
   $Res call({
-    Object id = freezed,
-    Object pid = freezed,
-    Object hostId = freezed,
-    Object name = freezed,
-    Object locked = freezed,
-    Object clients = freezed,
-    Object data = freezed,
+    Object? id = freezed,
+    Object? pid = freezed,
+    Object? hostId = freezed,
+    Object? name = freezed,
+    Object? locked = freezed,
+    Object? clients = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      pid: pid == freezed ? _value.pid : pid as String,
-      hostId: hostId == freezed ? _value.hostId : hostId as String,
-      name: name == freezed ? _value.name : name as String,
-      locked: locked == freezed ? _value.locked : locked as bool,
-      clients: clients == freezed ? _value.clients : clients as List<String>,
-      data: data == freezed ? _value.data : data as Data,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      pid: pid == freezed
+          ? _value.pid
+          : pid // ignore: cast_nullable_to_non_nullable
+              as String,
+      hostId: hostId == freezed
+          ? _value.hostId
+          : hostId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      locked: locked == freezed
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      clients: clients == freezed
+          ? _value.clients
+          : clients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Data,
     ));
   }
 
   @override
   $DataCopyWith<$Res> get data {
-    if (_value.data == null) {
-      return null;
-    }
     return $DataCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value));
     });
@@ -108,7 +143,14 @@ abstract class _$RoomDescriptionCopyWith<$Res> implements $RoomDescriptionCopyWi
   factory _$RoomDescriptionCopyWith(_RoomDescription value, $Res Function(_RoomDescription) then) =
       __$RoomDescriptionCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String pid, String hostId, String name, bool locked, List<String> clients, Data data});
+  $Res call(
+      {String id,
+      @_PidConverter() String pid,
+      String hostId,
+      String name,
+      bool locked,
+      List<String> clients,
+      Data data});
 
   @override
   $DataCopyWith<$Res> get data;
@@ -125,37 +167,65 @@ class __$RoomDescriptionCopyWithImpl<$Res> extends _$RoomDescriptionCopyWithImpl
 
   @override
   $Res call({
-    Object id = freezed,
-    Object pid = freezed,
-    Object hostId = freezed,
-    Object name = freezed,
-    Object locked = freezed,
-    Object clients = freezed,
-    Object data = freezed,
+    Object? id = freezed,
+    Object? pid = freezed,
+    Object? hostId = freezed,
+    Object? name = freezed,
+    Object? locked = freezed,
+    Object? clients = freezed,
+    Object? data = freezed,
   }) {
     return _then(_RoomDescription(
-      id: id == freezed ? _value.id : id as String,
-      pid: pid == freezed ? _value.pid : pid as String,
-      hostId: hostId == freezed ? _value.hostId : hostId as String,
-      name: name == freezed ? _value.name : name as String,
-      locked: locked == freezed ? _value.locked : locked as bool,
-      clients: clients == freezed ? _value.clients : clients as List<String>,
-      data: data == freezed ? _value.data : data as Data,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      pid: pid == freezed
+          ? _value.pid
+          : pid // ignore: cast_nullable_to_non_nullable
+              as String,
+      hostId: hostId == freezed
+          ? _value.hostId
+          : hostId // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      locked: locked == freezed
+          ? _value.locked
+          : locked // ignore: cast_nullable_to_non_nullable
+              as bool,
+      clients: clients == freezed
+          ? _value.clients
+          : clients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      data: data == freezed
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as Data,
     ));
   }
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_RoomDescription implements _RoomDescription {
-  const _$_RoomDescription({this.id, this.pid, this.hostId, this.name, this.locked, this.clients, this.data});
+  const _$_RoomDescription(
+      {required this.id,
+      @_PidConverter() required this.pid,
+      required this.hostId,
+      required this.name,
+      required this.locked,
+      this.clients = const [],
+      required this.data});
 
-  factory _$_RoomDescription.fromJson(Map<String, dynamic> json) => _$_$_RoomDescriptionFromJson(json);
+  factory _$_RoomDescription.fromJson(Map<String, dynamic> json) => _$$_RoomDescriptionFromJson(json);
 
   @override
   final String id;
   @override
+  @_PidConverter()
   final String pid;
   @override
   final String hostId;
@@ -163,6 +233,7 @@ class _$_RoomDescription implements _RoomDescription {
   final String name;
   @override
   final bool locked;
+  @JsonKey(defaultValue: const [])
   @override
   final List<String> clients;
   @override
@@ -176,52 +247,48 @@ class _$_RoomDescription implements _RoomDescription {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RoomDescription &&
-            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.pid, pid) || const DeepCollectionEquality().equals(other.pid, pid)) &&
-            (identical(other.hostId, hostId) || const DeepCollectionEquality().equals(other.hostId, hostId)) &&
-            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.locked, locked) || const DeepCollectionEquality().equals(other.locked, locked)) &&
-            (identical(other.clients, clients) || const DeepCollectionEquality().equals(other.clients, clients)) &&
-            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
+        (other.runtimeType == runtimeType &&
+            other is _RoomDescription &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.pid, pid) || other.pid == pid) &&
+            (identical(other.hostId, hostId) || other.hostId == hostId) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.locked, locked) || other.locked == locked) &&
+            const DeepCollectionEquality().equals(other.clients, clients) &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(pid) ^
-      const DeepCollectionEquality().hash(hostId) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(locked) ^
-      const DeepCollectionEquality().hash(clients) ^
-      const DeepCollectionEquality().hash(data);
+      Object.hash(runtimeType, id, pid, hostId, name, locked, const DeepCollectionEquality().hash(clients), data);
 
+  @JsonKey(ignore: true)
   @override
   _$RoomDescriptionCopyWith<_RoomDescription> get copyWith =>
       __$RoomDescriptionCopyWithImpl<_RoomDescription>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_RoomDescriptionToJson(this);
+    return _$$_RoomDescriptionToJson(this);
   }
 }
 
 abstract class _RoomDescription implements RoomDescription {
   const factory _RoomDescription(
-      {String id,
-      String pid,
-      String hostId,
-      String name,
-      bool locked,
+      {required String id,
+      @_PidConverter() required String pid,
+      required String hostId,
+      required String name,
+      required bool locked,
       List<String> clients,
-      Data data}) = _$_RoomDescription;
+      required Data data}) = _$_RoomDescription;
 
   factory _RoomDescription.fromJson(Map<String, dynamic> json) = _$_RoomDescription.fromJson;
 
   @override
   String get id;
   @override
+  @_PidConverter()
   String get pid;
   @override
   String get hostId;
@@ -234,7 +301,8 @@ abstract class _RoomDescription implements RoomDescription {
   @override
   Data get data;
   @override
-  _$RoomDescriptionCopyWith<_RoomDescription> get copyWith;
+  @JsonKey(ignore: true)
+  _$RoomDescriptionCopyWith<_RoomDescription> get copyWith => throw _privateConstructorUsedError;
 }
 
 Data _$DataFromJson(Map<String, dynamic> json) {
@@ -245,24 +313,21 @@ Data _$DataFromJson(Map<String, dynamic> json) {
 class _$DataTearOff {
   const _$DataTearOff();
 
-// ignore: unused_element
   _Data call() {
     return const _Data();
   }
 
-// ignore: unused_element
-  Data fromJson(Map<String, Object> json) {
+  Data fromJson(Map<String, Object?> json) {
     return Data.fromJson(json);
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $Data = _$DataTearOff();
 
 /// @nodoc
 mixin _$Data {
-  Map<String, dynamic> toJson();
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -292,13 +357,12 @@ class __$DataCopyWithImpl<$Res> extends _$DataCopyWithImpl<$Res> implements _$Da
   _Data get _value => super._value as _Data;
 }
 
-@JsonSerializable()
-
 /// @nodoc
+@JsonSerializable()
 class _$_Data implements _Data {
   const _$_Data();
 
-  factory _$_Data.fromJson(Map<String, dynamic> json) => _$_$_DataFromJson(json);
+  factory _$_Data.fromJson(Map<String, dynamic> json) => _$$_DataFromJson(json);
 
   @override
   String toString() {
@@ -307,7 +371,7 @@ class _$_Data implements _Data {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Data);
+    return identical(this, other) || (other.runtimeType == runtimeType && other is _Data);
   }
 
   @override
@@ -315,7 +379,7 @@ class _$_Data implements _Data {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_DataToJson(this);
+    return _$$_DataToJson(this);
   }
 }
 

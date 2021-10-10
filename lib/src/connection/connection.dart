@@ -8,7 +8,7 @@ part 'connection.freezed.dart';
 part 'connection.g.dart';
 
 abstract class Connection implements Disposable {
-  Stream<Message> get stream;
+  Stream<Message>? get stream;
 
   void send(Message message);
 }
@@ -49,14 +49,14 @@ final eventCodeMap = HashBiMap()
     MessageEvent.encodedPatch: -12,
   });
 
-String decode(Object event) => describeEnum(eventCodeMap.inverse[event is int ? event : int.parse(event.toString())]);
+String decode(Object? event) => describeEnum(eventCodeMap.inverse[event is int ? event : int.parse(event.toString())]);
 
-int encode(Object event) => eventCodeMap[event is MessageEvent ? event : getEnumValue(event.toString())];
+int? encode(Object? event) => eventCodeMap[event is MessageEvent ? event : getEnumValue(event.toString())];
 
 @freezed
 abstract class Message with _$Message {
   const factory Message._({
-    MessageEvent event,
+    required MessageEvent event,
     @Default([]) List<dynamic> data,
   }) = _Message;
 
@@ -84,7 +84,7 @@ abstract class Message with _$Message {
 
   factory Message.encodedPatch() => Message._(event: MessageEvent.encodedPatch);
 
-  factory Message.closed(int code, String reason) => Message._(event: MessageEvent.closed, data: [code, reason]);
+  factory Message.closed(int? code, String? reason) => Message._(event: MessageEvent.closed, data: [code, reason]);
 
   factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json..update('event', decode));
 }
