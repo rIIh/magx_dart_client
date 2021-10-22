@@ -30,7 +30,7 @@ class _$RoomDataTearOff {
     );
   }
 
-  RoomData fromJson(Map<String, Object?> json) {
+  RoomData fromJson(Map<String, Object> json) {
     return RoomData.fromJson(json);
   }
 }
@@ -160,16 +160,20 @@ class _$_RoomData implements _RoomData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _RoomData &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.port, port) || other.port == port) &&
-            const DeepCollectionEquality().equals(other.options, options));
+        (other is _RoomData &&
+            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.port, port) || const DeepCollectionEquality().equals(other.port, port)) &&
+            (identical(other.options, options) || const DeepCollectionEquality().equals(other.options, options)));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, port, const DeepCollectionEquality().hash(options));
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(port) ^
+      const DeepCollectionEquality().hash(options);
 
   @JsonKey(ignore: true)
   @override
@@ -188,13 +192,13 @@ abstract class _RoomData implements RoomData {
   factory _RoomData.fromJson(Map<String, dynamic> json) = _$_RoomData.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  int? get port;
+  int? get port => throw _privateConstructorUsedError;
   @override
-  Map<String, dynamic> get options;
+  Map<String, dynamic> get options => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RoomDataCopyWith<_RoomData> get copyWith => throw _privateConstructorUsedError;

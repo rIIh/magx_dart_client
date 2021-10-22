@@ -23,7 +23,8 @@ class _$RoomDescriptionTearOff {
 
   _RoomDescription call(
       {required String id,
-      @_PidConverter() required String pid,
+      @PidTypeConverter() required String pid,
+      int? port,
       required String hostId,
       required String name,
       required bool locked,
@@ -32,6 +33,7 @@ class _$RoomDescriptionTearOff {
     return _RoomDescription(
       id: id,
       pid: pid,
+      port: port,
       hostId: hostId,
       name: name,
       locked: locked,
@@ -40,7 +42,7 @@ class _$RoomDescriptionTearOff {
     );
   }
 
-  RoomDescription fromJson(Map<String, Object?> json) {
+  RoomDescription fromJson(Map<String, Object> json) {
     return RoomDescription.fromJson(json);
   }
 }
@@ -51,8 +53,9 @@ const $RoomDescription = _$RoomDescriptionTearOff();
 /// @nodoc
 mixin _$RoomDescription {
   String get id => throw _privateConstructorUsedError;
-  @_PidConverter()
+  @PidTypeConverter()
   String get pid => throw _privateConstructorUsedError;
+  int? get port => throw _privateConstructorUsedError;
   String get hostId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   bool get locked => throw _privateConstructorUsedError;
@@ -70,7 +73,8 @@ abstract class $RoomDescriptionCopyWith<$Res> {
       _$RoomDescriptionCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      @_PidConverter() String pid,
+      @PidTypeConverter() String pid,
+      int? port,
       String hostId,
       String name,
       bool locked,
@@ -92,6 +96,7 @@ class _$RoomDescriptionCopyWithImpl<$Res> implements $RoomDescriptionCopyWith<$R
   $Res call({
     Object? id = freezed,
     Object? pid = freezed,
+    Object? port = freezed,
     Object? hostId = freezed,
     Object? name = freezed,
     Object? locked = freezed,
@@ -107,6 +112,10 @@ class _$RoomDescriptionCopyWithImpl<$Res> implements $RoomDescriptionCopyWith<$R
           ? _value.pid
           : pid // ignore: cast_nullable_to_non_nullable
               as String,
+      port: port == freezed
+          ? _value.port
+          : port // ignore: cast_nullable_to_non_nullable
+              as int?,
       hostId: hostId == freezed
           ? _value.hostId
           : hostId // ignore: cast_nullable_to_non_nullable
@@ -145,7 +154,8 @@ abstract class _$RoomDescriptionCopyWith<$Res> implements $RoomDescriptionCopyWi
   @override
   $Res call(
       {String id,
-      @_PidConverter() String pid,
+      @PidTypeConverter() String pid,
+      int? port,
       String hostId,
       String name,
       bool locked,
@@ -169,6 +179,7 @@ class __$RoomDescriptionCopyWithImpl<$Res> extends _$RoomDescriptionCopyWithImpl
   $Res call({
     Object? id = freezed,
     Object? pid = freezed,
+    Object? port = freezed,
     Object? hostId = freezed,
     Object? name = freezed,
     Object? locked = freezed,
@@ -184,6 +195,10 @@ class __$RoomDescriptionCopyWithImpl<$Res> extends _$RoomDescriptionCopyWithImpl
           ? _value.pid
           : pid // ignore: cast_nullable_to_non_nullable
               as String,
+      port: port == freezed
+          ? _value.port
+          : port // ignore: cast_nullable_to_non_nullable
+              as int?,
       hostId: hostId == freezed
           ? _value.hostId
           : hostId // ignore: cast_nullable_to_non_nullable
@@ -213,7 +228,8 @@ class __$RoomDescriptionCopyWithImpl<$Res> extends _$RoomDescriptionCopyWithImpl
 class _$_RoomDescription implements _RoomDescription {
   const _$_RoomDescription(
       {required this.id,
-      @_PidConverter() required this.pid,
+      @PidTypeConverter() required this.pid,
+      this.port,
       required this.hostId,
       required this.name,
       required this.locked,
@@ -225,8 +241,10 @@ class _$_RoomDescription implements _RoomDescription {
   @override
   final String id;
   @override
-  @_PidConverter()
+  @PidTypeConverter()
   final String pid;
+  @override
+  final int? port;
   @override
   final String hostId;
   @override
@@ -241,26 +259,34 @@ class _$_RoomDescription implements _RoomDescription {
 
   @override
   String toString() {
-    return 'RoomDescription(id: $id, pid: $pid, hostId: $hostId, name: $name, locked: $locked, clients: $clients, data: $data)';
+    return 'RoomDescription(id: $id, pid: $pid, port: $port, hostId: $hostId, name: $name, locked: $locked, clients: $clients, data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _RoomDescription &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.pid, pid) || other.pid == pid) &&
-            (identical(other.hostId, hostId) || other.hostId == hostId) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.locked, locked) || other.locked == locked) &&
-            const DeepCollectionEquality().equals(other.clients, clients) &&
-            (identical(other.data, data) || other.data == data));
+        (other is _RoomDescription &&
+            (identical(other.id, id) || const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.pid, pid) || const DeepCollectionEquality().equals(other.pid, pid)) &&
+            (identical(other.port, port) || const DeepCollectionEquality().equals(other.port, port)) &&
+            (identical(other.hostId, hostId) || const DeepCollectionEquality().equals(other.hostId, hostId)) &&
+            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.locked, locked) || const DeepCollectionEquality().equals(other.locked, locked)) &&
+            (identical(other.clients, clients) || const DeepCollectionEquality().equals(other.clients, clients)) &&
+            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, pid, hostId, name, locked, const DeepCollectionEquality().hash(clients), data);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(pid) ^
+      const DeepCollectionEquality().hash(port) ^
+      const DeepCollectionEquality().hash(hostId) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(locked) ^
+      const DeepCollectionEquality().hash(clients) ^
+      const DeepCollectionEquality().hash(data);
 
   @JsonKey(ignore: true)
   @override
@@ -276,7 +302,8 @@ class _$_RoomDescription implements _RoomDescription {
 abstract class _RoomDescription implements RoomDescription {
   const factory _RoomDescription(
       {required String id,
-      @_PidConverter() required String pid,
+      @PidTypeConverter() required String pid,
+      int? port,
       required String hostId,
       required String name,
       required bool locked,
@@ -286,20 +313,22 @@ abstract class _RoomDescription implements RoomDescription {
   factory _RoomDescription.fromJson(Map<String, dynamic> json) = _$_RoomDescription.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  @_PidConverter()
-  String get pid;
+  @PidTypeConverter()
+  String get pid => throw _privateConstructorUsedError;
   @override
-  String get hostId;
+  int? get port => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get hostId => throw _privateConstructorUsedError;
   @override
-  bool get locked;
+  String get name => throw _privateConstructorUsedError;
   @override
-  List<String> get clients;
+  bool get locked => throw _privateConstructorUsedError;
   @override
-  Data get data;
+  List<String> get clients => throw _privateConstructorUsedError;
+  @override
+  Data get data => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RoomDescriptionCopyWith<_RoomDescription> get copyWith => throw _privateConstructorUsedError;
@@ -317,7 +346,7 @@ class _$DataTearOff {
     return const _Data();
   }
 
-  Data fromJson(Map<String, Object?> json) {
+  Data fromJson(Map<String, Object> json) {
     return Data.fromJson(json);
   }
 }
@@ -371,7 +400,7 @@ class _$_Data implements _Data {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _Data);
+    return identical(this, other) || (other is _Data);
   }
 
   @override

@@ -28,7 +28,7 @@ class _$MessageTearOff {
     );
   }
 
-  Message fromJson(Map<String, Object?> json) {
+  Message fromJson(Map<String, Object> json) {
     return Message.fromJson(json);
   }
 }
@@ -131,14 +131,14 @@ class _$_Message implements _Message {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Message &&
-            (identical(other.event, event) || other.event == event) &&
-            const DeepCollectionEquality().equals(other.data, data));
+        (other is _Message &&
+            (identical(other.event, event) || const DeepCollectionEquality().equals(other.event, event)) &&
+            (identical(other.data, data) || const DeepCollectionEquality().equals(other.data, data)));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, event, const DeepCollectionEquality().hash(data));
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(event) ^ const DeepCollectionEquality().hash(data);
 
   @JsonKey(ignore: true)
   @override
@@ -156,9 +156,9 @@ abstract class _Message implements Message {
   factory _Message.fromJson(Map<String, dynamic> json) = _$_Message.fromJson;
 
   @override
-  MessageEvent get event;
+  MessageEvent get event => throw _privateConstructorUsedError;
   @override
-  List<dynamic> get data;
+  List<dynamic> get data => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MessageCopyWith<_Message> get copyWith => throw _privateConstructorUsedError;

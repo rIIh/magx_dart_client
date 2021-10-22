@@ -8,7 +8,8 @@ part of 'room_description.dart';
 
 _$_RoomDescription _$$_RoomDescriptionFromJson(Map<String, dynamic> json) => _$_RoomDescription(
       id: json['id'] as String,
-      pid: const _PidConverter().fromJson(json['pid']),
+      pid: const PidTypeConverter().fromJson(json['pid']),
+      port: json['port'] as int?,
       hostId: json['hostId'] as String,
       name: json['name'] as String,
       locked: json['locked'] as bool,
@@ -18,7 +19,8 @@ _$_RoomDescription _$$_RoomDescriptionFromJson(Map<String, dynamic> json) => _$_
 
 Map<String, dynamic> _$$_RoomDescriptionToJson(_$_RoomDescription instance) => <String, dynamic>{
       'id': instance.id,
-      'pid': const _PidConverter().toJson(instance.pid),
+      'pid': const PidTypeConverter().toJson(instance.pid),
+      'port': instance.port,
       'hostId': instance.hostId,
       'name': instance.name,
       'locked': instance.locked,
