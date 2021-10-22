@@ -42,7 +42,7 @@ class _$RoomDescriptionTearOff {
     );
   }
 
-  RoomDescription fromJson(Map<String, Object> json) {
+  RoomDescription fromJson(Map<String, dynamic> json) {
     return RoomDescription.fromJson(json);
   }
 }

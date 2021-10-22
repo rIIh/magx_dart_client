@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:magx_client/src/converters/pid_type_converter.dart';
+
+import '../converters/pid_type_converter.dart';
 
 part 'room_description.freezed.dart';
 part 'room_description.g.dart';
