@@ -1,3 +1,10 @@
+### [4.0.1](https://github.com/rIIh/magx_dart_client/compare/v4.0.0...v4.0.1) (2021-10-22)
+
+
+### Bug Fixes
+
+* fix room description structure ([b3f5b08](https://github.com/rIIh/magx_dart_client/commit/b3f5b08fc58dea286695ce5a1fd3ad8a524a45f0))
+
 ## [4.0.0](https://github.com/rIIh/magx_dart_client/compare/v3.3.0...v4.0.0) (2021-10-10)
 
 
