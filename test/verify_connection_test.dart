@@ -14,8 +14,7 @@ void main() async {
     ));
   });
 
-  final testHostServer =
-      Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
+  final testHostServer = Platform.environment['TEST_HOST_SERVER'] ?? 'http://localhost:3030';
   Future<bool> checkReady() async {
     return http.Client()
         .get(Uri.parse('$testHostServer/magx/'))

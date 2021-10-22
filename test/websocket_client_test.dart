@@ -46,20 +46,12 @@ void main() async {
         try {
           final uri = Uri.parse(testHostServer);
           client1 = MagxClient(
-            MagxClientParams(
-                address: uri.host,
-                port: uri.port,
-                secure: uri.scheme.contains('https')),
-            tokenStorage:
-                TokenStorage.delegate(() => token1, (value) => token1 = value),
+            MagxClientParams(address: uri.host, port: uri.port, secure: uri.scheme.contains('https')),
+            tokenStorage: TokenStorage.delegate(() => token1, (value) => token1 = value),
           );
           client2 = MagxClient(
-            MagxClientParams(
-                address: uri.host,
-                port: uri.port,
-                secure: uri.scheme.contains('https')),
-            tokenStorage:
-                TokenStorage.delegate(() => token2, (value) => token2 = value),
+            MagxClientParams(address: uri.host, port: uri.port, secure: uri.scheme.contains('https')),
+            tokenStorage: TokenStorage.delegate(() => token2, (value) => token2 = value),
           );
           final data1 = await client1.authenticateGuest(deviceId: Uuid().v4());
           final data2 = await client2.authenticateGuest(deviceId: Uuid().v4());
@@ -98,8 +90,7 @@ void main() async {
       test('reconnects successfully', () async {
         final room = await client1.createAndConnect('mosx-chat');
         expect(room.isSuccessful, isTrue);
-        room.body!.stream!
-            .listen((message) => print('1: ${message.toString()}'));
+        room.body!.stream!.listen((message) => print('1: ${message.toString()}'));
         activeConnections.add(room.body!);
         expectLater(room.body!.stream, emits(equals(Message.connected())));
         final joinedRoom = await client2.connect(room.body!.id);
@@ -125,8 +116,7 @@ void main() async {
         final createdRoom = await client1.createAndConnect('chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body!);
-        createdRoom.body!.stream!
-            .listen((message) => print('1: ${message.toString()}'));
+        createdRoom.body!.stream!.listen((message) => print('1: ${message.toString()}'));
         expectLater(
           createdRoom.body!.stream!.where(
             (event) =>
@@ -142,19 +132,14 @@ void main() async {
             [
               emits(equals(Message.connected())),
               emits(predicate<Message>(
-                (message) =>
-                    message.event == MessageEvent.message &&
-                    (message.data[1] as String).contains('joined'),
+                (message) => message.event == MessageEvent.message && (message.data[1] as String).contains('joined'),
               )),
               emits(predicate<Message>(
                 (message) =>
-                    message.event == MessageEvent.message &&
-                    (message.data[1] as String).contains('test_message'),
+                    message.event == MessageEvent.message && (message.data[1] as String).contains('test_message'),
               )),
               emits(predicate<Message>(
-                (message) =>
-                    message.event == MessageEvent.message &&
-                    (message.data[1] as String).contains('left'),
+                (message) => message.event == MessageEvent.message && (message.data[1] as String).contains('left'),
               )),
             ],
           ),
@@ -163,12 +148,10 @@ void main() async {
         final joinedRoom = await client2.connect(createdRoom.body!.id);
         expect(joinedRoom, isNotNull);
         activeConnections.add(joinedRoom!);
-        joinedRoom.stream!
-            .listen((message) => print('2: ${message.toString()}'));
+        joinedRoom.stream!.listen((message) => print('2: ${message.toString()}'));
 
         await Future.delayed(Duration(milliseconds: 400));
-        joinedRoom.connection
-            .send(Message.message(['message', 'test_message']));
+        joinedRoom.connection.send(Message.message(['message', 'test_message']));
         client2.leaveRoom(joinedRoom.id);
         client1.leaveRoom(joinedRoom.id);
       });
@@ -177,8 +160,7 @@ void main() async {
         final createdRoom = await client1.createAndConnect('mosx-chat');
         expect(createdRoom.body, isNotNull);
         activeConnections.add(createdRoom.body!);
-        createdRoom.body!.stream!
-            .listen((message) => print('1: ${message.toString()}'));
+        createdRoom.body!.stream!.listen((message) => print('1: ${message.toString()}'));
         await Future.delayed(Duration(seconds: 2));
       });
     },

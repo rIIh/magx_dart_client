@@ -17,12 +17,8 @@ void main() async {
         try {
           final uri = Uri.parse(testHostServer);
           client = MagxClient(
-            MagxClientParams(
-                address: uri.host,
-                port: uri.port,
-                secure: uri.scheme.contains('https')),
-            tokenStorage:
-                TokenStorage.delegate(() => token1, (value) => token1 = value),
+            MagxClientParams(address: uri.host, port: uri.port, secure: uri.scheme.contains('https')),
+            tokenStorage: TokenStorage.delegate(() => token1, (value) => token1 = value),
           );
 
           final data1 = await client!.authenticateGuest(deviceId: Uuid().v4());
